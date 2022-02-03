@@ -1,0 +1,23 @@
+* {
+    /* bien alineado al margen */
+    margin: 0%;
+    padding: 0%;
+  }
+  /* clases comienzan por punto */
+.body{
+      background-color: #DBD6D0;
+}
+
+.header {
+    width: 100%; /*ancho de toda la pantalla*/
+    z-index:1;
+}
+
+.headerStyle {
+    color: #ff0000;
+}
+
+.characters {
+      margin-top: 0; /*140px del div que lo contiene o div padre*/
+      margin-bottom: 60px; /*60px del div que lo contiene en la parte de abajo*/
+}
