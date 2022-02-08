@@ -67,7 +67,6 @@ const fillPokeData = (poke) => {
 //     info.next == null ? "disabled" : ""
 //   }"><a class="page-link" onclick="getAPI('${info.next}')">></a></li>`;
 
-
 //   document.getElementById("pagination").innerHTML = html;
 // };
 
