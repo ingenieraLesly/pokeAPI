@@ -1,4 +1,4 @@
-const API = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=00";
+const API = "https://pokeapi.co/api/v2/pokemon?limit=52&offset=00";
 let html = "";
 
 const getAPI = (pokeApi) => {
@@ -14,12 +14,12 @@ const getAPI = (pokeApi) => {
     });
 };
 //ahora traeré la url con el contenido adicional de peso e imagen de cada pokemon
-const getUrlDatos = (pokeDatos) => {
+const getPokeData = (urlData) => {
   // console.log("Datos de cada poke");
-  return fetch(pokeDatos)
+  return fetch(urlData)
     .then((response) => response.json())
     .then((json) => {
-      fillDataPokes(json);
+      fillPokeData(json);
     })
     .catch((error) => {
       console.error("Error in the API:", error);
@@ -28,20 +28,23 @@ const getUrlDatos = (pokeDatos) => {
 
 const fillData = (data) => {
   data.forEach((item) => {
-    getUrlDatos(item.url);
+    getPokeData(item.url);
   });
 };
 
-const fillDataPokes = (image) => {
+const fillPokeData = (poke) => {
   html += '<div class="col">';
-  html += '<div class="text-white card h-100 bg-dark">';
-  html += `<img src="${image.sprites.other.dream_world.front_default}" class="card-img-top card-img-bottom" alt="...">`;
-  html += '<div class="card-body">';
-  html += `<h5 class="card-title font">Name: ${image.name}</h5>`;
+  html += '<div class="text-white card h-100">';
+  html += '<div class="card-body card">';
+  html += '<div class="font">';
+  html += `<h5 class="card-title font"> ${poke.name.toUpperCase()}</h5>`;
   html +=  '<br>'
-  html += `<p class="card-text font">Height: ${image.height}</p>`;
-  html += `<p class="card-text font">Weight: ${image.weight}</p>`;
-  html += `<p class="card-text font">Experience: ${image.base_experience}</p>`;
+  html += `<p class="card-text font">ID: ${poke.id}</p>`;
+  html += `<p class="card-text font">Height: ${poke.height}</p>`;
+  html += `<p class="card-text font">Weight: ${poke.weight}</p>`;
+  html += '</div>'
+  html +=  '<br>'
+  html += `<img src="${poke.sprites.other.dream_world.front_default}" class="card-img-top card-img-bottom image" alt="...">`;
   html += "</div>";
   html += "</div>";
   html += "</div>";
@@ -50,16 +53,22 @@ const fillDataPokes = (image) => {
 };
 
 
-const pagination = (jason) => {
-  let prevDisabled = data.previous == null ? "disabled" : "";
-  let nextDisabled = data.next == null ? "disabled" : "";
+// const pagination = (info) => {
+//   let html = "";
 
-  document.getElementById(
-    "next"
-  ).innerHTML = `<a class="btn ${nextDisabled}" onclick="getData('${data.next}')"><i class="fas fa-chevron-right"></i></a>`;
-  document.getElementById(
-    "prev"
-  ).innerHTML = `<a class="btn ${prevDisabled}" onclick="getData('${data.previous}')"><i class="fas fa-chevron-left"></i></a>`;
-};
+//   info.prev == null ? "disabled" : "";
+
+//   info.next == null ? "disabled" : "";
+
+//   html += `<li class="page-item ${
+//     info.prev == null ? "disabled" : ""
+//   }"><a class="page-link" onclick="getAPI('${info.prev}')"><</a></li>`;
+//   html += `<li class="page-item ${
+//     info.next == null ? "disabled" : ""
+//   }"><a class="page-link" onclick="getAPI('${info.next}')">></a></li>`;
+
+
+//   document.getElementById("pagination").innerHTML = html;
+// };
 
 getAPI(API);
